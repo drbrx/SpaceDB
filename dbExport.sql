@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `allegato`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `allegato` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
-  `Path` varchar(256) COLLATE utf8mb4_general_ci NOT NULL,
+  `Nome` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Path` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `IdTipo` int NOT NULL,
   `IdMissione` int NOT NULL,
   PRIMARY KEY (`Id`),
@@ -54,8 +54,8 @@ DROP TABLE IF EXISTS `missione`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `missione` (
   `Numero` int NOT NULL,
-  `Nome` varchar(128) COLLATE utf8mb4_general_ci NOT NULL,
-  `Descrizione` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Nome` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Descrizione` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Data` datetime NOT NULL,
   `PiattaformaId` int NOT NULL,
   PRIMARY KEY (`Numero`),
@@ -84,8 +84,8 @@ DROP TABLE IF EXISTS `modellostadio`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `modellostadio` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
-  `Descrizione` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Nome` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Descrizione` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS `piattaforma`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `piattaforma` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `Nome` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Longitudine` float NOT NULL,
   `Latitudine` float NOT NULL,
   PRIMARY KEY (`Id`)
@@ -137,9 +137,9 @@ CREATE TABLE `stadio` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `CodiceVersione` int NOT NULL,
   `Posizione` int NOT NULL,
-  `Note` text COLLATE utf8mb4_general_ci,
-  `IdAttaccoStadioPrecedente` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `IdAttaccoStadioSuccessivo` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `IdAttaccoStadioPrecedente` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `IdAttaccoStadioSuccessivo` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `IdMissione` int NOT NULL,
   `IdModello` int NOT NULL,
   PRIMARY KEY (`Id`),
@@ -247,7 +247,7 @@ DROP TABLE IF EXISTS `stadio_strumento`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `stadio_strumento` (
   `IdStadio` int NOT NULL,
-  `IdStrumento` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `IdStrumento` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Numero` int NOT NULL,
   PRIMARY KEY (`IdStadio`,`IdStrumento`),
   KEY `idx_stadio` (`IdStadio`) USING BTREE,
@@ -262,6 +262,7 @@ CREATE TABLE `stadio_strumento` (
 
 LOCK TABLES `stadio_strumento` WRITE;
 /*!40000 ALTER TABLE `stadio_strumento` DISABLE KEYS */;
+INSERT INTO `stadio_strumento` VALUES (31,'STR_001',2),(31,'STR_002',1),(32,'STR_002',3),(32,'STR_003',2),(33,'STR_003',1),(33,'STR_004',4),(34,'STR_001',1),(34,'STR_005',2),(35,'STR_006',1),(35,'STR_007',3),(36,'STR_002',2),(36,'STR_008',1),(37,'STR_001',2),(37,'STR_009',1),(38,'STR_004',1),(38,'STR_010',3);
 /*!40000 ALTER TABLE `stadio_strumento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -273,8 +274,8 @@ DROP TABLE IF EXISTS `strumento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `strumento` (
-  `CodiceComponente` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
-  `Nome` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `CodiceComponente` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `Nome` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`CodiceComponente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -298,7 +299,7 @@ DROP TABLE IF EXISTS `tipoallegato`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipoallegato` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `Nome` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `VisibileAlPubblico` tinyint(1) NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -321,6 +322,205 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'progettobosio'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `AggiungiStadioMissione` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AggiungiStadioMissione`(
+    IN IdMissione INT,
+    IN IdModello INT,
+    IN Versione INT,
+    IN Note TEXT,
+    IN IdAttaccoPrecedente VARCHAR(32)
+)
+BEGIN
+    DECLARE nuovaPosizione INT;
+
+    SELECT COALESCE(MAX(Posizione), 0) + 1
+    INTO nuovaPosizione
+    FROM stadio
+    WHERE IdMissione = IdMissione;
+
+    INSERT INTO stadio (
+        CodiceVersione,
+        Posizione,
+        Note,
+        IdMissione,
+        IdModello,
+        IdAttaccoStadioPrecedente
+    )
+    VALUES (
+        Versione,
+        nuovaPosizione,
+        Note,
+        IdMissione,
+        IdModello,
+        IdAttaccoPrecedente
+    );
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `EstraiAllegatiMissione` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EstraiAllegatiMissione`(
+    IN IdMissione INT,
+    IN VisibilePubblico BOOL
+)
+BEGIN
+    SELECT 
+        allegato.Id,
+        allegato.Nome,
+        allegato.Path,
+        tipo.Nome AS TipoAllegato,
+        tipo.VisibileAlPubblico
+    FROM 
+        allegato
+        INNER JOIN tipoallegato AS tipo ON allegato.IdTipo = tipo.Id
+    WHERE 
+        allegato.IdMissione = IdMissione
+        AND tipo.VisibileAlPubblico = VisibilePubblico;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetMissioniBySitoLancio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetMissioniBySitoLancio`(
+    IN sitoId INT,
+    IN skipCount INT,
+    IN takeCount INT
+)
+BEGIN
+    SELECT *
+    FROM missione
+    WHERE IdSitoLancio = sitoId
+    ORDER BY DataLancio DESC
+    LIMIT takeCount OFFSET skipCount;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `GetModuliByMissione` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GetModuliByMissione`(
+    IN missioneId INT
+)
+BEGIN
+    SELECT 
+        stadio.Id,
+        stadio.Posizione,
+        modello.Nome as Modello,
+        (
+            SELECT 
+                JSON_OBJECTAGG(strumento.Nome, stadio_strumento.Numero)
+            FROM stadio_strumento
+            JOIN strumento ON strumento.CodiceComponente = stadio_strumento.IdStrumento
+            WHERE stadio_strumento.Idstadio = stadio.Id
+        ) AS Strumentazione
+    FROM stadio
+    INNER JOIN modellostadio AS modello ON stadio.IdModello = modello.Id
+    WHERE stadio.IdMissione = missioneId
+    ORDER BY stadio.Posizione ASC;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ImpostaQuantitaStrumentoStadio` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ImpostaQuantitaStrumentoStadio`(
+  IN IdStadio INT,
+  IN IdStrumento VARCHAR(32),
+  IN Numero INT
+)
+BEGIN
+  IF Numero = 0 THEN
+    DELETE FROM stadio_strumento
+    WHERE IdStadio = IdStadio AND IdStrumento = IdStrumento;
+  ELSE
+    INSERT INTO stadio_strumento (IdStadio, IdStrumento, Numero)
+    VALUES (IdStadio, IdStrumento, Numero)
+    ON DUPLICATE KEY UPDATE Numero = VALUES(Numero);
+  END IF;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `RimuoviStadioMissione` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `RimuoviStadioMissione`(
+    IN IdMissioneTarget INT,
+    IN PosizioneTarget INT
+)
+BEGIN
+    DELETE FROM stadio
+    WHERE IdMissione = IdMissioneTarget AND Posizione = PosizioneTarget;
+
+    UPDATE stadio
+    SET Posizione = Posizione - 1
+    WHERE IdMissione = IdMissioneTarget AND Posizione > PosizioneTarget;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -331,4 +531,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-23 15:46:59
+-- Dump completed on 2025-05-24 17:09:09
