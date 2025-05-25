@@ -117,9 +117,9 @@ elif menu == "Estrazione allegati":
     missioni = session.query(Missione).all()
     missione = st.selectbox("Missione", missioni, format_func=lambda m: m.Nome)
     pubblico = st.radio(
-        "Destinazione",
+        "Visibilità",
         [False, True],
-        format_func=lambda x: "Pubblico" if x else "Interno",
+        format_func=lambda x: "Tutto" if x else "Solo Interno",
     )
 
     try:
