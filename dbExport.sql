@@ -33,7 +33,9 @@ CREATE TABLE `allegato` (
   PRIMARY KEY (`Id`),
   UNIQUE KEY `uq_location` (`Nome`,`Path`),
   KEY `fk_corredazione` (`IdMissione`),
-  CONSTRAINT `fk_corredazione` FOREIGN KEY (`IdMissione`) REFERENCES `missione` (`Numero`)
+  KEY `fk_tipologia_idx` (`IdTipo`),
+  CONSTRAINT `fk_corredazione` FOREIGN KEY (`IdMissione`) REFERENCES `missione` (`Numero`),
+  CONSTRAINT `fk_tipologia` FOREIGN KEY (`IdTipo`) REFERENCES `tipoallegato` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -539,4 +541,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-25 17:22:03
+-- Dump completed on 2025-05-25 19:45:37
