@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `progettobosio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `progettobosio`;
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: localhost    Database: progettobosio
@@ -152,7 +154,7 @@ CREATE TABLE `stadio` (
   CONSTRAINT `fk_iterazione` FOREIGN KEY (`IdModello`) REFERENCES `modellostadio` (`Id`),
   CONSTRAINT `fk_precedente` FOREIGN KEY (`IdAttaccoStadioPrecedente`) REFERENCES `strumento` (`CodiceComponente`),
   CONSTRAINT `fk_successivo` FOREIGN KEY (`IdAttaccoStadioSuccessivo`) REFERENCES `strumento` (`CodiceComponente`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +163,7 @@ CREATE TABLE `stadio` (
 
 LOCK TABLES `stadio` WRITE;
 /*!40000 ALTER TABLE `stadio` DISABLE KEYS */;
-INSERT INTO `stadio` VALUES (31,1,1,'Stadio 1-1',NULL,'STR_001',1,1),(32,1,2,'Stadio 1-2','STR_001','STR_002',1,2),(33,1,3,'Stadio 1-3','STR_002',NULL,1,3),(34,1,1,'Stadio 2-1',NULL,'STR_002',2,2),(35,1,2,'Stadio 2-2','STR_002','STR_003',2,3),(36,1,3,'Stadio 2-3','STR_003',NULL,2,1),(37,1,1,'Stadio 3-1',NULL,'STR_003',3,3),(38,1,2,'Stadio 3-2','STR_003','STR_004',3,1),(39,1,3,'Stadio 3-3','STR_004',NULL,3,2),(40,1,1,'Stadio 4-1',NULL,'STR_004',4,1),(41,1,2,'Stadio 4-2','STR_004','STR_005',4,2),(42,1,3,'Stadio 4-3','STR_005',NULL,4,3),(43,1,1,'Stadio 5-1',NULL,'STR_005',5,2),(44,1,2,'Stadio 5-2','STR_005','STR_006',5,3),(45,1,3,'Stadio 5-3','STR_006',NULL,5,1),(46,1,1,'Stadio 6-1',NULL,'STR_001',6,3),(47,1,2,'Stadio 6-2','STR_001','STR_002',6,1),(48,1,3,'Stadio 6-3','STR_002',NULL,6,2),(49,1,1,'Stadio 7-1',NULL,'STR_003',7,2),(50,1,2,'Stadio 7-2','STR_003','STR_004',7,3),(51,1,3,'Stadio 7-3','STR_004',NULL,7,1),(52,1,1,'Stadio 8-1',NULL,'STR_005',8,1),(53,1,2,'Stadio 8-2','STR_005','STR_006',8,2),(54,1,3,'Stadio 8-3','STR_006',NULL,8,3),(55,1,1,'Stadio 9-1',NULL,'STR_002',9,3),(56,1,2,'Stadio 9-2','STR_002','STR_003',9,1),(57,1,3,'Stadio 9-3','STR_003',NULL,9,2),(58,1,1,'Stadio 10-1',NULL,'STR_004',10,2),(59,1,2,'Stadio 10-2','STR_004','STR_005',10,3),(60,1,3,'Stadio 10-3','STR_005',NULL,10,1);
+INSERT INTO `stadio` VALUES (33,1,1,'Stadio 1-3','STR_002',NULL,1,3),(34,1,1,'Stadio 2-1',NULL,'STR_002',2,2),(35,1,2,'Stadio 2-2','STR_002','STR_003',2,3),(36,1,3,'Stadio 2-3','STR_003',NULL,2,1),(37,1,1,'Stadio 3-1',NULL,'STR_003',3,3),(38,1,2,'Stadio 3-2','STR_003','STR_004',3,1),(39,1,3,'Stadio 3-3','STR_004',NULL,3,2),(40,1,1,'Stadio 4-1',NULL,'STR_004',4,1),(41,1,2,'Stadio 4-2','STR_004','STR_005',4,2),(42,1,3,'Stadio 4-3','STR_005',NULL,4,3),(43,1,1,'Stadio 5-1',NULL,'STR_005',5,2),(44,1,2,'Stadio 5-2','STR_005','STR_006',5,3),(45,1,3,'Stadio 5-3','STR_006',NULL,5,1),(46,1,1,'Stadio 6-1',NULL,'STR_001',6,3),(47,1,2,'Stadio 6-2','STR_001','STR_002',6,1),(48,1,3,'Stadio 6-3','STR_002',NULL,6,2),(50,1,1,'Stadio 7-2','STR_003','STR_004',7,3),(51,1,2,'Stadio 7-3','STR_004',NULL,7,1),(52,1,1,'Stadio 8-1',NULL,'STR_005',8,1),(53,1,2,'Stadio 8-2','STR_005','STR_006',8,2),(54,1,3,'Stadio 8-3','STR_006',NULL,8,3),(55,1,1,'Stadio 9-1',NULL,'STR_002',9,3),(56,1,2,'Stadio 9-2','STR_002','STR_003',9,1),(57,1,3,'Stadio 9-3','STR_003',NULL,9,2),(58,1,1,'Stadio 10-1',NULL,'STR_004',10,2),(59,1,2,'Stadio 10-2','STR_004','STR_005',10,3),(60,1,3,'Stadio 10-3','STR_005',NULL,10,1),(69,123,2,'TEst','STR_010',NULL,1,1),(70,2,3,'t2','STR_011',NULL,1,2);
 /*!40000 ALTER TABLE `stadio` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -195,8 +197,10 @@ WHERE
         AND Posizione = NEW.Posizione - 1
 LIMIT 1;
 
-  IF next_precedente IS NOT NULL AND next_precedente != NEW.IdAttaccoStadioSuccessivo
-  OR prev_successivo IS NOT NULL AND prev_successivo != NEW.IdAttaccoStadioPrecedente 
+IF (next_precedente IS NOT NULL AND 
+    next_precedente COLLATE utf8mb4_general_ci != NEW.IdAttaccoStadioSuccessivo COLLATE utf8mb4_general_ci)
+OR (prev_successivo IS NOT NULL AND 
+    prev_successivo COLLATE utf8mb4_general_ci != NEW.IdAttaccoStadioPrecedente COLLATE utf8mb4_general_ci)
   THEN
     SIGNAL SQLSTATE '45002'
       SET MESSAGE_TEXT = 'Lo stadio che si vuole inserire non ha attacchi compatibili con gli stadi adiacenti già presenti';
@@ -251,7 +255,9 @@ CREATE TABLE `stadio_strumento` (
   `Numero` int NOT NULL,
   PRIMARY KEY (`IdStadio`,`IdStrumento`),
   KEY `idx_stadio` (`IdStadio`) USING BTREE,
+  KEY `fk_strumento_idx` (`IdStrumento`),
   CONSTRAINT `fk_stadio` FOREIGN KEY (`IdStadio`) REFERENCES `stadio` (`Id`),
+  CONSTRAINT `fk_strumento` FOREIGN KEY (`IdStrumento`) REFERENCES `strumento` (`CodiceComponente`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `chk_numero_positivo` CHECK ((`Numero` > 0))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -262,7 +268,7 @@ CREATE TABLE `stadio_strumento` (
 
 LOCK TABLES `stadio_strumento` WRITE;
 /*!40000 ALTER TABLE `stadio_strumento` DISABLE KEYS */;
-INSERT INTO `stadio_strumento` VALUES (31,'STR_001',2),(31,'STR_002',1),(32,'STR_002',3),(32,'STR_003',2),(33,'STR_003',1),(33,'STR_004',4),(34,'STR_001',1),(34,'STR_005',2),(35,'STR_006',1),(35,'STR_007',3),(36,'STR_002',2),(36,'STR_008',1),(37,'STR_001',2),(37,'STR_009',1),(38,'STR_004',1),(38,'STR_010',3);
+INSERT INTO `stadio_strumento` VALUES (50,'STR_001',1),(50,'STR_002',2),(50,'STR_003',4),(50,'STR_005',111),(52,'STR_004',5);
 /*!40000 ALTER TABLE `stadio_strumento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -333,7 +339,7 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `AggiungiStadioMissione`(
-    IN IdMissione INT,
+    IN IdMissioneParam INT,
     IN IdModello INT,
     IN Versione INT,
     IN Note TEXT,
@@ -345,7 +351,7 @@ BEGIN
     SELECT COALESCE(MAX(Posizione), 0) + 1
     INTO nuovaPosizione
     FROM stadio
-    WHERE IdMissione = IdMissione;
+    WHERE stadio.IdMissione = IdMissioneParam;
 
     INSERT INTO stadio (
         CodiceVersione,
@@ -359,7 +365,7 @@ BEGIN
         Versione,
         nuovaPosizione,
         Note,
-        IdMissione,
+        IdMissioneParam,
         IdModello,
         IdAttaccoPrecedente
     );
@@ -418,10 +424,11 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `GetMissioniBySitoLancio`(
     IN takeCount INT
 )
 BEGIN
-    SELECT *
+    SELECT Numero,Nome,Descrizione,Data
+Data
     FROM missione
-    WHERE IdSitoLancio = sitoId
-    ORDER BY DataLancio DESC
+    WHERE PiattaformaId = sitoId
+    ORDER BY missione.Data DESC
     LIMIT takeCount OFFSET skipCount;
 END ;;
 DELIMITER ;
@@ -475,17 +482,18 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ImpostaQuantitaStrumentoStadio`(
-  IN IdStadio INT,
+  IN IdModulo INT,
   IN IdStrumento VARCHAR(32),
   IN Numero INT
 )
 BEGIN
-  IF Numero = 0 THEN
+  IF Numero = 0
+  THEN
     DELETE FROM stadio_strumento
-    WHERE IdStadio = IdStadio AND IdStrumento = IdStrumento;
+    WHERE IdStadio = IdModulo AND IdStrumento = IdStrumento;
   ELSE
     INSERT INTO stadio_strumento (IdStadio, IdStrumento, Numero)
-    VALUES (IdStadio, IdStrumento, Numero)
+    VALUES (IdModulo, IdStrumento, Numero)
     ON DUPLICATE KEY UPDATE Numero = VALUES(Numero);
   END IF;
 END ;;
@@ -531,4 +539,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-24 17:09:09
+-- Dump completed on 2025-05-25 17:22:03
