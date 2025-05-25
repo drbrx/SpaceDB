@@ -118,7 +118,7 @@ elif menu == "Estrazione allegati":
     missione = st.selectbox("Missione", missioni, format_func=lambda m: m.Nome)
     pubblico = st.radio(
         "Destinazione",
-        [True, False],
+        [False, True],
         format_func=lambda x: "Pubblico" if x else "Interno",
     )
 
