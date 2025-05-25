@@ -1,4 +1,4 @@
-After importing the required libraries as indicated in the .txt file, the demo app can be run with the "python -m streamlit run main.py" command.
+After importing the required libraries as indicated in the requirements.txt file (pip install -r requirements.txt), the demo app can be run with the "python -m streamlit run main.py" command.
 
 A config.json file is expected to be present in the same folder as the main.py file, in the following format:
 {
