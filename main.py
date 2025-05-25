@@ -119,7 +119,7 @@ elif menu == "Estrazione allegati":
     pubblico = st.radio(
         "Visibilità",
         [True, False],
-        format_func=lambda x: "Tutti" if not x else "Solo Interni",
+        format_func=lambda x: "Pubblico" if not x else "Solo Interni",
     )
 
     try:
@@ -155,7 +155,7 @@ elif menu == "Impostazione conteggio strumentazione":
     stadio = st.selectbox(
         "Stadio",
         stadi,
-        format_func=lambda s: f"Stadio {s.Id} (Missione {s.IdMissione})",
+        format_func=lambda s: f"[{s.Id}] (Missione {s.IdMissione}, stadio {s.Posizione})",
     )
     strumento = st.selectbox("Strumento", strumenti, format_func=lambda s: s.Nome)
     numero = st.number_input("Quantità", min_value=0)
